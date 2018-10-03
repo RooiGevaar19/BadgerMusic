@@ -2,12 +2,29 @@ doctype
 html
     head
         link(rel='stylesheet', href="/stylesheets/index.css")
+        script(src="/scripts/socket.io-client/dist/socket.io.js")
+        script(type="text/javascript", src="/jquery-3.2.0.min.js")
+        script(type="text/javascript", src="/sidebar.js")
         title BadgerMusic
     body
-        .toolbar
-            .logo
-                a(href="/")
-                    img(src="/pictures/BadgerMusicLogoWhite1.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
-            .tbitems
-                img(src="/pictures/sidebar.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
-        .content Hello World!
+        header
+            .toolbar
+                .hleft
+                    .logo
+                        a(href="/")
+                            img(src="/pictures/BadgerMusicLogoWhite1.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
+                    .panel_info Hello, #{(user?user.nickname:'guest')}!
+                .tbitems
+                    img#showsidebar(src="/pictures/sidebar.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
+        .page
+            .sidebar#sidebarid
+                .panel_info 
+                    img.avatar(src="/photos/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                .panel_info #{(user?user.nickname:'guest')}
+                br
+                .category_item#hidesidebar Hide sidebar
+                br
+                .category_item#signin Log In
+                .category_item#signin Sign Up
+            .content 
+                p This is Content!

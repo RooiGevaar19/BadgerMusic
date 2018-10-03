@@ -1,0 +1,39 @@
+@import "colors.less";
+
+.sidebar {
+    position: fixed;
+    padding-top: 0.1in;
+    right: 0;
+    height: 100vh;
+    background: @col-dblue;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    border-left: 2px solid @col-blue;
+
+    .category_item {
+        padding: 0.1in;
+        min-width: 2in;
+        max-width: 3.5in;
+        width: 20vw;
+        color: @col-white;
+    }
+
+    .category_item:hover {
+        //color: @col-blue;
+        background: @col-blue;
+    }
+
+    .panel_info {
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        color: @col-white;
+        img {
+            height: 1in;
+            width: auto;
+        }
+    }
+}

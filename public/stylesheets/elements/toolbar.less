@@ -8,17 +8,28 @@ div.toolbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    .logo {
-        height: 0.5in;
-        a {
-            margin: 0;
-        }
-        img {
+    .hleft {
+        display: flex;
+        align-items: center;
+        vertical-align: middle;
+        flex-direction: row;
+        .logo {
             height: 0.5in;
-            width: auto;
+            a {
+                margin: 0;
+            }
+            img {
+                height: 0.5in;
+                width: auto;
+            }
+            &:hover {
+                background-color: @col-lblue;
+            }
         }
-        &:hover {
-            background-color: @col-lblue;
+        .panel_info {
+            color: @col-white;
+            margin-left: 0.1in;
+            white-space: nowrap;
         }
     }
 
