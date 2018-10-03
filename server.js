@@ -22,4 +22,5 @@ let port = process.env.port | 8080;
 
 http.listen(port);
 
+console.log("Welcome to the BadgerMusic Server!");
 console.log("Magic happens on port " + port);

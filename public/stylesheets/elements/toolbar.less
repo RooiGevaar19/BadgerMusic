@@ -1,0 +1,36 @@
+@import "colors.less";
+
+div.toolbar {
+    background-color: @col-blue;
+    align-self: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .logo {
+        height: 0.5in;
+        a {
+            margin: 0;
+        }
+        img {
+            height: 0.5in;
+            width: auto;
+        }
+        &:hover {
+            background-color: @col-lblue;
+        }
+    }
+
+    .tbitems {
+        height: 0.5in;
+        img {
+            height: 0.5in;
+            width: auto;
+        }
+        &:hover {
+            background-color: @col-lblue;
+        }
+    }
+
+}

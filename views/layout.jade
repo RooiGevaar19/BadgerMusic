@@ -1,6 +1,13 @@
 doctype
 html
     head
+        link(rel='stylesheet', href="/stylesheets/index.css")
         title BadgerMusic
     body
-        div Hello World!
+        .toolbar
+            .logo
+                a(href="/")
+                    img(src="/pictures/BadgerMusicLogoWhite1.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
+            .tbitems
+                img(src="/pictures/sidebar.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
+        .content Hello World!
