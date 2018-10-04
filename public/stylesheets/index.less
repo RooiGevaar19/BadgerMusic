@@ -1,10 +1,19 @@
 // compile me plox :)
 @import "elements/fonts.less";
 @import "elements/background.less";
+@import "elements/formatting.less";
 @import "elements/toolbar.less";
 @import "elements/sidebar.less";
+@import "elements/forms.less";
 
 .page {
     display: flex;
     flex-direction: row;
+    .content {
+        width: 100vw;
+        margin: 0.1in;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }

@@ -1,11 +1,13 @@
 doctype
 html
     head
+        title BadgerMusic
         link(rel='stylesheet', href="/stylesheets/index.css")
         script(src="/scripts/socket.io-client/dist/socket.io.js")
         script(type="text/javascript", src="/jquery-3.2.0.min.js")
         script(type="text/javascript", src="/sidebar.js")
-        title BadgerMusic
+        //script(type="text/javascript", src="/scripts/audiojs/audio.min.js")
+        block scripts
     body
         header
             .toolbar
@@ -18,13 +20,15 @@ html
                     img#showsidebar(src="/pictures/sidebar.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
         .page
             .sidebar#sidebarid
-                .panel_info 
-                    img.avatar(src="/photos/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
-                .panel_info #{(user?user.nickname:'guest')}
-                br
+                if user
+                    .panel_info 
+                        img.avatar(src="/photos/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                    .panel_info #{(user?user.nickname:'guest')}
+                    br
                 .category_item#hidesidebar Hide sidebar
                 br
                 .category_item#signin Log In
-                .category_item#signin Sign Up
+                a(href="/signup")
+                    .category_item#signin Sign Up
             .content 
-                p This is Content!
+                block content

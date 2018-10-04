@@ -15,7 +15,11 @@ app.use('/scripts', express.static(__dirname + '/node_modules'));
 // ========= SERVER RUNNING
 
 app.get("/", function(req, res) {
-    res.render("layout", {});
+    res.render("index", {});
+});
+
+app.get("/signup", function(req, res) {
+    res.render("account_signup", {});
 });
 
 let port = process.env.port | 8080;
