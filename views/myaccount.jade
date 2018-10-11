@@ -1,0 +1,22 @@
+extend layout
+
+block content
+    .align-center
+        .window
+            .accinfo
+                .title 
+                    img.avatar(src="/photos/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                .title Your account information
+                table
+                    tr.field
+                        td
+                            p E-mail:
+                        td
+                            p #{user.username}
+                    tr.field
+                        td
+                            p Nickname:
+                        td
+                            p #{user.nickname}
+                .field
+                    p #{message}

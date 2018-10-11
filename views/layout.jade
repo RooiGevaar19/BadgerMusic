@@ -27,8 +27,13 @@ html
                     br
                 .category_item#hidesidebar Hide sidebar
                 br
-                .category_item#signin Log In
-                a(href="/signup")
-                    .category_item#signin Sign Up
+                unless user
+                    a(href="/login")
+                        .category_item#signin Log In
+                    a(href="/signup")
+                        .category_item#signin Sign Up
+                else
+                    a(href="/logout")
+                        .category_item#signin Log Out
             .content 
                 block content

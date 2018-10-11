@@ -1,0 +1,23 @@
+extend layout
+
+block content
+    .align-center
+        .window
+            form(action="/login", method="post")
+                .title Enter the world of music!
+                table
+                    tr.field
+                        td
+                            p E-mail:
+                        td
+                            input.email(type="text", name="username")
+                    tr.field
+                        td
+                            p Password:
+                        td
+                            input.pass(type="password", name="password")
+                .field
+                    input(type="submit", value="Log in!")
+                p #{message}
+                p #{output}
+                    
