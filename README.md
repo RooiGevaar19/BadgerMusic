@@ -6,3 +6,4 @@
 - [Audio.js](https://kolber.github.io/audiojs/)
 - [Passport.js](http://www.passportjs.org)
 - [Mongoose](https://mongoosejs.com)
+- [Socket.io](https://socket.io)
