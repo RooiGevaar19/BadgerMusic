@@ -2,21 +2,34 @@ extend layout
 
 block content
     .align-center
-        .window
-            .accinfo
-                .title 
-                    img.avatar(src="/photos/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
-                .title Your account information
-                table
-                    tr.field
-                        td
-                            p E-mail:
-                        td
-                            p #{user.username}
-                    tr.field
-                        td
-                            p Nickname:
-                        td
-                            p #{user.nickname}
-                .field
-                    p #{message}
+        if user
+            .window
+                .accinfo
+                    .logo 
+                        img.avatar_big(src="/photos/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                    .title Your account information
+                    table
+                        tr
+                            td
+                                p E-mail:
+                            td
+                                p #{user.username}
+                        tr
+                            td
+                                p Nickname:
+                            td
+                                p #{user.nickname}
+                        tr
+                            td
+                                p Login:
+                            td
+                                p #{user.name?user.name:"<not provided>"}
+                    .field
+                        p #{message}
+            .window_buttons
+                button Change account info
+                button Change avatar
+                button Change password
+                button Delete this account
+        else
+            p We are sorry, but you won't find anything interesting here – as long as you are not logged in. :(

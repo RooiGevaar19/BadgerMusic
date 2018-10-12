@@ -21,8 +21,9 @@ html
         .page
             .sidebar#sidebarid
                 if user
-                    .panel_info 
-                        img.avatar(src="/photos/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                    .panel_info
+                        a(href="/account/#{user.id}") 
+                            img.avatar_big(src="/photos/avatar/#{user.id}.jpg", onerror="this.src='/pictures/unknown.jpg'")
                     .panel_info #{(user?user.nickname:'guest')}
                     br
                 .category_item#hidesidebar Hide sidebar
@@ -35,5 +36,7 @@ html
                 else
                     a(href="/logout")
                         .category_item#signin Log Out
+                    a(href="/myaccount")
+                        .category_item#signin Account Settings
             .content 
                 block content

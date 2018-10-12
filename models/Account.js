@@ -15,7 +15,7 @@ let AccountSchema = new Schema({
     },
     nickname: { type: String, required: true },
     password: { type: String },
-    name: String,
+    fullname: String,
     description: String,
     birthday: Date,
     isPrivate: Boolean,
@@ -26,8 +26,9 @@ let AccountSchema = new Schema({
 
 AccountSchema.pre('save', function(next) {
     let currentDate = new Date();
-    this.updateDate = currentDate;
+    this.updatedDate = currentDate;
     if (!this.creationDate) this.creationDate = currentDate;
+    //if (!this.name) this.name = this.username.split("@")[0];
     next();
 });
 

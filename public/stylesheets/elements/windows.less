@@ -1,0 +1,126 @@
+@import "colors.less";
+
+.window {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //width: 50%;
+    //min-width: fit-content;
+
+    background: @col-dblue;
+    padding: 0.1in;
+    color: @col-white;
+    .logo {
+        display: flex;
+        justify-content: center;
+        margin: 0.05in;
+    }
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .field {
+        margin: 0.05in;
+    }
+    p {
+        margin: 0.05in;
+    }
+    input[type="text"] {
+        font-family: casualfont;
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 0.05in;
+        width: 2.1in;
+        &.date {
+            width: 0.7in;
+        }
+        &.datetime {
+            width: 0.7in;
+        }
+    }
+
+    input[type="password"] {
+        width: 2.1in;
+        font-family: casualfont;
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 0.05in;
+    }
+
+    button {
+        background: @col-black;
+        color: @col-lblue;
+        font-family: casualfont;
+        font-size: 24px;
+        padding-top: 0.05in;
+        padding-bottom: 0.05in;
+        padding-left: 0.1in;
+        padding-right: 0.1in;
+        border: none;
+        margin-top: 0.1in;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background: @col-llblue;
+        color: @col-black;
+    }
+}
+
+.window_persistent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0.1in;
+    color: @col-white; 
+
+    button {
+        background: @col-black;
+        color: @col-lblue;
+        font-family: casualfont;
+        font-size: 24px;
+        padding-top: 0.05in;
+        padding-bottom: 0.05in;
+        padding-left: 0.1in;
+        padding-right: 0.1in;
+        border: none;
+        margin-top: 0.1in;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background: @col-llblue;
+        color: @col-black;
+    }
+}
+
+.window_buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0.1in;
+    color: @col-white; 
+
+    button {
+        background: @col-black;
+        color: @col-lblue;
+        font-family: casualfont;
+        font-size: 24px;
+        padding-top: 0.05in;
+        padding-bottom: 0.05in;
+        padding-left: 0.1in;
+        padding-right: 0.1in;
+        border: none;
+        margin-top: 0.1in;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    button:hover {
+        background: @col-llblue;
+        color: @col-black;
+    }
+}

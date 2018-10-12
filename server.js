@@ -67,6 +67,80 @@ app.get("/myaccount", function(req, res) {
     res.render("myaccount", { user : req.user });
 });
 
+// ========= API ROUTER
+
+let router = express.Router(); 
+
+router.route('/accounts')
+    .post(function(req, res) {
+        let bear = Account({
+            username: req.body.username,
+            nickname: req.body.nickname,
+            password: hex_md5(req.body.password)
+        });
+
+        bear.save(function(err) {
+            if (err) res.send(err);
+            res.json({ message: 'Account created!' });
+        });
+    })
+    .get(function(req, res) {
+        Account.find({}, function(err, bears) {
+            if (err) {
+                console.log('error');
+                res.send(err);
+            }
+            res.json(bears);
+        });
+    });
+
+router.route('/accounts/:acc_id')
+    .get(function(req, res) {
+        Account.findById(req.params.acc_id, function(err, acc) {
+            if (err) {
+                console.log('error');
+                res.send(err);
+            }
+            res.json(acc);
+        });
+    })
+    .put(function(req, res) {
+        // use our bear model to find the bear we want
+        Account.findById(req.params.acc_id, function(err, acc) {
+            if (err) res.send(err);
+
+            acc.username = req.body.username;
+            acc.nickname = req.body.nickname;
+            acc.password = hex_md5(req.body.password);
+
+            acc.save(function(err) {
+                if (err) res.send(err);
+                res.json({ message: 'Account updated!' });
+            });
+
+        });
+    })
+    .delete(function(req, res) {
+        Account.remove({
+            _id: req.params.acc_id
+        }, function(err, bear) {
+            if (err) res.send(err);
+            res.json({ message: 'Successfully deleted' });
+        });
+    });
+
+//router.route('/accounts_remall')
+//    .get(function(req, res) {
+//        Account.remove({}, 
+//        function(err, bear) {
+//            if (err) res.send(err);
+//            res.json({ message: 'Successfully deleted' });
+//        });
+//    }); 
+
+app.use('/api', router);
+
+
 // ========= SERVER RUNNING
 
 let port = process.env.port | 8080;

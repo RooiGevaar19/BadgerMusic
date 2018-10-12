@@ -17,24 +17,28 @@ userController.register = function(req, res) {
 // Post registration
 userController.doRegister = function(req, res) {
     //console.log(req.body);
-    if (req.body.password === req.body.password2) {
-        Account.register(
-            new Account({ 
-                username: req.body.username, 
-                nickname: req.body.nickname 
-            }), 
-            req.body.password, 
-            function(err, user) {
-                if (err) {
-                    return res.render("signup", { message : err.message });
+    if (req.body.username && req.body.nickname && req.body.password && req.body.password2) {
+        if (req.body.password === req.body.password2) {
+            Account.register(
+                new Account({ 
+                    username: req.body.username, 
+                    nickname: req.body.nickname 
+                }), 
+                req.body.password, 
+                function(err, user) {
+                    if (err) {
+                        return res.render("signup", { message : err.message });
+                    }
+                    passport.authenticate('local', { failureRedirect: "/login" })(req, res, function () {
+                        res.redirect('/');
+                    });
                 }
-                //passport.authenticate('local')(req, res, function () {
-                    res.redirect('/');
-                //});
-            }
-        );
+            );
+        } else {
+            return res.render("account_signup", { message : "Passwords don\'t match" });
+        }
     } else {
-        return res.render("account_signup", { message : "Passwords don\'t match" });
+        return res.render("account_signup", { message : "Fill all fields." });
     }
 };
 
