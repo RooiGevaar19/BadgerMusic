@@ -64,30 +64,32 @@ userController.logout = function(req, res) {
 // remove account
 userController.removeAccount = function(req, res) {
     let xd = req.body.id;
-    //Auction.remove({
-    //    owner: req.user
-    //}, function(err) {
-    //    if (err) res.send(err);
-    //});
-    //Message.remove({
-    //    author: req.user
-    //}, function(err) {
-    //    if (err) res.send(err);
-    //});
-    //Chat.remove({})
-    //    .or([{ dude1: req.user }, { dude2: req.user }])
-    //    .exec(function(err) {
-    //        if (err) res.send(err);
-    //    });
-    req.logout();
-    //let filePath = "./public/photos/avatar/"+xd+".jpg"; 
-    //if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-    Account.remove({
-        _id: xd
-    }, function(err, bear) {
-        if (err) res.send(err);
-        res.redirect('/');
-    });
+    if (req.user && xd.toString() === req.user.id.toString()) {
+        //Auction.remove({
+        //    owner: req.user
+        //}, function(err) {
+        //    if (err) res.send(err);
+        //});
+        //Message.remove({
+        //    author: req.user
+        //}, function(err) {
+        //    if (err) res.send(err);
+        //});
+        //Chat.remove({})
+        //    .or([{ dude1: req.user }, { dude2: req.user }])
+        //    .exec(function(err) {
+        //        if (err) res.send(err);
+        //    });
+        req.logout();
+        let filePath = "./public/photos/accounts/avatar/"+xd+".jpg"; 
+        if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+        Account.remove({
+            _id: xd
+        }, function(err, bear) {
+            if (err) res.send(err);
+            res.redirect('/');
+        });
+    }
 };
 
 // modify account

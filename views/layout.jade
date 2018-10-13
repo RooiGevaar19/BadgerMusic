@@ -6,7 +6,6 @@ html(lang="en")
         script(src="/scripts/socket.io-client/dist/socket.io.js")
         script(type="text/javascript", src="/jquery-3.2.0.min.js")
         script(type="text/javascript", src="/sidebar.js")
-        script(type="text/javascript", src="/scripts/audiojs/audio.min.js")
         block scripts
     body
         header
@@ -23,7 +22,7 @@ html(lang="en")
                 if user
                     .panel_info
                         a(href="/account/#{user.id}") 
-                            img.avatar_big(src="/photos/avatar/#{user.id}.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                            img.avatar_big(src="/photos/accounts/avatar/#{user.id}.jpg", onerror="this.src='/pictures/unknown.jpg'")
                     .panel_info #{(user?user.nickname:'guest')}
                     br
                 .category_item#hidesidebar Hide sidebar

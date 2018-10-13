@@ -1,12 +1,15 @@
 extend layout
 
+block scripts
+    script(type="text/javascript", src="/warnings.js")
+
 block content
     .align-center
         if user
             .window
                 .accinfo
                     .logo 
-                        img.avatar_big(src="/photos/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                        img.avatar_big(src="/photos/accounts/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
                     .title Your account information
                     table
                         tr
@@ -21,15 +24,35 @@ block content
                                 p #{user.nickname}
                         tr
                             td
-                                p Login:
+                                p Name and Surname:
                             td
                                 p #{user.name?user.name:"<not provided>"}
+                        tr
+                            td
+                                p Location
+                            td
+                                p #{user.location?user.location:"<not provided>"}
+                        tr
+                            td
+                                p Birthday
+                            td
+                                p #{user.birthday?""+(user.birthday.getMonth()+1)+"/"+user.birthday.getDate()+"/"+user.birthday.getFullYear()+"":"<not provided>"}
+                        tr
+                            td
+                                p Description
+                            td
+                                p #{user.description?user.description:"<not provided>"}
                     .field
                         p #{message}
             .window_buttons
-                button Change account info
-                button Change avatar
-                button Change password
-                button Delete this account
+                form(action="/changeAvatar" method="GET")
+                    input(type="submit", value="Change avatar")
+                form(action="/modifyacc" method="GET")
+                    input(type="submit", value="Change account information")
+                form(action="/changepass" method="GET")
+                    input(type="submit", value="Change password")
+                form(action="/remacc" method="POST")
+                    input(type="hidden", name="id", value="#{user.id}")
+                    input.rem(type="submit", value="Delete your account")
         else
             p We are sorry, but you won't find anything interesting here – as long as you are not logged in. :(

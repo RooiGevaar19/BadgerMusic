@@ -55,10 +55,11 @@ app.get("/login", function(req, res) {
     res.render("account_signin", {});
 });
 
-app.post('/login', auth.doLogin);
-app.get('/logout', auth.logout);
-app.get('/signup', auth.register);
+app.post("/login", auth.doLogin);
+app.get("/logout", auth.logout);
+app.get("/signup", auth.register);
 app.post('/signup', auth.doRegister);
+app.post("/remacc", auth.removeAccount);
 
 app.get("/myaccount", function(req, res) {
     res.render("myaccount", { user : req.user });
@@ -69,18 +70,6 @@ app.get("/myaccount", function(req, res) {
 let router = express.Router(); 
 
 router.route('/accountz')
-    .post(function(req, res) {
-        let bear = Account({
-            username: req.body.username,
-            nickname: req.body.nickname,
-            password: hex_md5(req.body.password)
-        });
-
-        bear.save(function(err) {
-            if (err) res.send(err);
-            res.json({ message: 'Account created!' });
-        });
-    })
     .get(function(req, res) {
         Account.find({}, function(err, bears) {
             if (err) {

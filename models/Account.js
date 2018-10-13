@@ -17,6 +17,7 @@ let AccountSchema = new Schema({
     password: { type: String },
     fullname: String,
     description: String,
+    location: String,
     birthday: Date,
     isPrivate: Boolean,
     isAdmin: Boolean,
