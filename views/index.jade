@@ -1,1 +1,10 @@
 extend layout
+
+block scripts
+    script(type="text/javascript")
+            | audiojs.events.ready(function() {
+            |     var as = audiojs.createAll();
+            | });
+
+block content
+    audio(src="/mp3/test.mp3")

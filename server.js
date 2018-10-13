@@ -54,12 +54,9 @@ app.get("/", function(req, res) {
 app.get("/login", function(req, res) {
     res.render("account_signin", {});
 });
-app.post('/login', function(req, res) {
-    auth.doLogin(req, res);
-});
-app.get('/logout', function(req,res) {
-    auth.logout(req,res);
-});
+
+app.post('/login', auth.doLogin);
+app.get('/logout', auth.logout);
 app.get('/signup', auth.register);
 app.post('/signup', auth.doRegister);
 
@@ -71,7 +68,7 @@ app.get("/myaccount", function(req, res) {
 
 let router = express.Router(); 
 
-router.route('/accounts')
+router.route('/accountz')
     .post(function(req, res) {
         let bear = Account({
             username: req.body.username,
