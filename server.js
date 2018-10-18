@@ -65,6 +65,10 @@ app.get("/myaccount", function(req, res) {
     res.render("myaccount", { user : req.user });
 });
 
+app.get("/modifyacc", function(req, res) {
+    res.render("myaccount_modify", { user : req.user });
+});
+
 // ========= API ROUTER
 
 let router = express.Router(); 

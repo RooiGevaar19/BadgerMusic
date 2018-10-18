@@ -1,0 +1,53 @@
+extend layout
+
+block scripts
+    script(type="text/javascript", src="/warnings.js")
+
+block content
+    .align-center
+        if user
+            .window
+                form#accform(action="/modifyacc", method="post")
+                    .logo 
+                        img.avatar_big(src="/photos/accounts/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                    .title Your account information
+                    table
+                        tr
+                            td
+                                p E-mail:
+                            td
+                                p #{user.username}
+                        tr
+                            td
+                                p Nickname:
+                            td
+                                input(type="text", name="nickname", value="#{user.nickname}")
+                        tr
+                            td
+                                p Name and Surname:
+                            td
+                                input(type="text", name="name", value="#{user.name?user.name:''}")
+                        tr
+                            td
+                                p Location
+                            td
+                                input(type="text", name="location", value="#{user.location?user.location:''}")
+                        tr
+                            td
+                                p Birthday
+                            td
+                                input.date(type="text", name="birthdaym", value="#{user.birthday?user.birthday.getMonth()+1:''}")
+                                input.date(type="text", name="birthdayd", value="#{user.birthday?user.birthday.getDate():''}")
+                                input.date(type="text", name="birthdayy", value="#{user.birthday?user.birthday.getFullYear():''}")
+                        tr
+                            td
+                                p Description
+                            td
+                                .textbox
+                                    textarea(name="description", form="accform", cols="40") #{user.description?user.description:''}
+                    .field
+                        input(type="submit" value="Change account information")
+                    .field
+                        p #{message}
+        else
+            p We are sorry, but you won't find anything interesting here – as long as you are not logged in. :(
