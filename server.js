@@ -1,6 +1,8 @@
 //jshint esversion:6, node:true
 let express = require('express');  
 let app = express();
+let fs = require('fs');
+let multer = require('multer');
 
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
@@ -69,7 +71,32 @@ app
     .post("/modifyacc", auth.doModifyAccount)
     .get("/changepass", auth.changePassword)
     .post("/changepass", auth.doChangePassword)
-;
+    .get('/changeAvatar', auth.changeAvatar);
+
+// ========= PHOTOS STORAGE
+
+let avatarStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, "public/photos/accounts/avatar/");
+    },
+    filename: function(req, file, callback) {
+        callback(null, req.user._id+".jpg");
+    }
+});
+
+let upload1 = multer({ storage: avatarStorage });
+
+app.post("/uploadAvatar", upload1.single('avatar'), function(req, res) {
+    if (!req.file) {
+        res.render("account_changeavatar", { user : req.user, message : "An error happened when uploading the avatar." });
+    } else {
+        if ((/\.jpg$/i).test(req.file.filename)) {
+            res.redirect('/myaccount');
+        } else {
+            res.render("account_changeavatar", { user : req.user, message : "The image must have a .jpg extension." });
+        }
+    } 
+});
 
 // ========= API ROUTER
 

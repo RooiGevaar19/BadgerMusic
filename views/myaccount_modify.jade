@@ -10,7 +10,7 @@ block content
                 form#accform(action="/modifyacc", method="post")
                     input(type="hidden", name="id", value="#{user.id}")
                     .logo 
-                        img.avatar_big(src="/photos/accounts/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                        img.avatar_big(src="/photos/accounts/avatar/#{user.id}.jpg", onerror="this.src='/pictures/unknown.jpg'")
                     .title Your account information
                     table
                         tr

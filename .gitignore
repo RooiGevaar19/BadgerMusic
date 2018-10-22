@@ -3,4 +3,5 @@ package-lock.json
 **/trash/
 **/*.css
 **/*.code-workspace
+public/photos/accounts/avatar/*.jpg
 

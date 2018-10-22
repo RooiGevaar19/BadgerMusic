@@ -18,4 +18,10 @@ $(() => {
             ev.preventDefault();
         }
     });
+
+    $(".cha2").click(function(ev) {
+        if (!confirm("Are you sure you want to change your avatar?")) {
+            ev.preventDefault();
+        }
+    });
 });

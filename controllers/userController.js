@@ -144,22 +144,22 @@ userController.doChangePassword = function(req, res) {
         }
     });
 };
-//
-//userController.changeAvatar = function(req, res) {
-//    res.render("changeavatar", {user : req.user});
-//};
-//
-//userController.showAccount = function(req, res) {
-//    Account
-//        .findById(req.params.aid)
-//        .exec(function(err, cat) {
-//            if (err) res.send(err);
-//            res.render("account_info", { user : req.user, account : cat });
-//        });
-//};
-//
-//userController.showNone = function(req, res) {
-//    res.render("account_info", { user : req.user });
-//};
+
+userController.changeAvatar = function(req, res) {
+    res.render("account_changeavatar", {user : req.user});
+};
+
+userController.showAccount = function(req, res) {
+    Account
+        .findById(req.params.aid)
+        .exec(function(err, cat) {
+            if (err) res.send(err);
+            res.render("account_info", { user : req.user, account : cat });
+        });
+};
+
+userController.showNone = function(req, res) {
+    res.render("account_info", { user : req.user });
+};
 
 module.exports = userController;

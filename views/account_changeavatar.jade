@@ -1,0 +1,29 @@
+extend layout
+
+block scripts
+    script(type="text/javascript", src="/warnings.js")
+
+block content
+    .align-center
+        if user
+            .window
+                form(action="/uploadAvatar", method="POST", enctype="multipart/form-data")
+                    input(type="hidden", name="id", value="#{user.id}")
+                    .title Here you can change your password
+                    table
+                        tr.field
+                            td
+                                p Old avatar:
+                            td
+                                img.avatar(src="/photos/accounts/avatar/#{user.id}.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                        tr.field
+                            td
+                                p Upload a new one 
+                                p.tiny (.jpg files, preferred width/height ratio 1:1):
+                            td
+                                input(type="file", name="avatar") 
+                    .field
+                        input.cha2(type="submit", value="Change avatar!")
+                        p #{message}
+        else
+            p We are sorry, but you won't find anything interesting here – as long as you are not logged in. :(
