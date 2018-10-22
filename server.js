@@ -67,6 +67,8 @@ app
     })
     .get("/modifyacc", auth.modifyAccount)
     .post("/modifyacc", auth.doModifyAccount)
+    .get("/changepass", auth.changePassword)
+    .post("/changepass", auth.doChangePassword)
 ;
 
 // ========= API ROUTER

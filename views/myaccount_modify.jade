@@ -56,7 +56,7 @@ block content
                                 input#pf(type="radio", name="isprivate", value="true", checked=(user.isPrivate === true ? "checked" : undefined))
                                 label(for="pf") Disallow the other users to see your birthday
                     .field
-                        input(type="submit" value="Change account information")
+                        input.mod(type="submit" value="Change account information")
                     .field
                         p * – Field required
                         p #{message}

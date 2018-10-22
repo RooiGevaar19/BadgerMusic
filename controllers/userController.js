@@ -127,19 +127,23 @@ userController.doModifyAccount = function(req, res) {
     });
 };
 
-//userController.changePassword = function(req, res) {
-//    res.render("changepass", {user : req.user});
-//};
-//
-//userController.doChangePassword = function(req, res) {
-//    Account.findById(req.body.id, function(err, acc) {
-//        if (err) res.send(err);
-//        acc.changePassword(req.body.oldpassword, req.body.newpassword, function(err) {
-//            if (err) return res.render("changepass", { user : req.user, message : err.message });
-//            res.redirect('/myaccount');
-//        });
-//    });
-//};
+userController.changePassword = function(req, res) {
+    res.render("account_changepass", {user : req.user});
+};
+
+userController.doChangePassword = function(req, res) {
+    Account.findById(req.body.id, function(err, acc) {
+        if (err) res.send(err);
+        if (req.body.newpassword === req.body.newpassword2) {
+            acc.changePassword(req.body.oldpassword, req.body.newpassword, function(err) {
+                if (err) return res.render("account_changepass", { user : req.user, message : err.message });
+                res.redirect('/myaccount');
+            });
+        } else {
+            res.render("account_changepass", { user : req.user, message : "Passwords don't match." });
+        }
+    });
+};
 //
 //userController.changeAvatar = function(req, res) {
 //    res.render("changeavatar", {user : req.user});

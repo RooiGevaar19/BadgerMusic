@@ -8,13 +8,13 @@ $(() => {
     });
 
     $(".mod").click(function(ev) {
-        if (!confirm("Are you sure you want to change information of your account?\nYou won't change it back then!")) {
+        if (!confirm("Are you sure you want to change information of your account?")) {
             ev.preventDefault();
         }
     });
 
     $(".cha").click(function(ev) {
-        if (!confirm("Are you sure you want to change your password?\nYou will be logged out afterwards.")) {
+        if (!confirm("Are you sure you want to change your password?")) {
             ev.preventDefault();
         }
     });
