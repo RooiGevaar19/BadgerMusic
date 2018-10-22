@@ -8,6 +8,7 @@ block content
         if user
             .window
                 form#accform(action="/modifyacc", method="post")
+                    input(type="hidden", name="id", value="#{user.id}")
                     .logo 
                         img.avatar_big(src="/photos/accounts/avatar/guwno.jpg", onerror="this.src='/pictures/unknown.jpg'")
                     .title Your account information
@@ -19,14 +20,14 @@ block content
                                 p #{user.username}
                         tr
                             td
-                                p Nickname:
+                                p Nickname*:
                             td
                                 input(type="text", name="nickname", value="#{user.nickname}")
                         tr
                             td
                                 p Name and Surname:
                             td
-                                input(type="text", name="name", value="#{user.name?user.name:''}")
+                                input(type="text", name="fullname", value="#{user.fullname?user.fullname:''}")
                         tr
                             td
                                 p Location
@@ -34,20 +35,30 @@ block content
                                 input(type="text", name="location", value="#{user.location?user.location:''}")
                         tr
                             td
-                                p Birthday
+                                p Birthday (MM/DD/YYYY)*:
                             td
-                                input.date(type="text", name="birthdaym", value="#{user.birthday?user.birthday.getMonth()+1:''}")
-                                input.date(type="text", name="birthdayd", value="#{user.birthday?user.birthday.getDate():''}")
-                                input.date(type="text", name="birthdayy", value="#{user.birthday?user.birthday.getFullYear():''}")
+                                input.date(type="text", name="birthdaym", value="#{user.birthday?user.birthday.getMonth()+1:'06'}")
+                                input.date(type="text", name="birthdayd", value="#{user.birthday?user.birthday.getDate():'30'}")
+                                input.date(type="text", name="birthdayy", value="#{user.birthday?user.birthday.getFullYear():'1996'}")
                         tr
                             td
                                 p Description
                             td
                                 .textbox
                                     textarea(name="description", form="accform", cols="40") #{user.description?user.description:''}
+                    table.privacyinfo
+                        tr
+                            td
+                                input#pt(type="radio", name="isprivate", value="false", checked=(user.isPrivate !== true ? "checked" : undefined))
+                                label(for="pt") Allow the other users to see your birthday
+                        tr
+                            td
+                                input#pf(type="radio", name="isprivate", value="true", checked=(user.isPrivate === true ? "checked" : undefined))
+                                label(for="pf") Disallow the other users to see your birthday
                     .field
                         input(type="submit" value="Change account information")
                     .field
+                        p * – Field required
                         p #{message}
         else
             p We are sorry, but you won't find anything interesting here – as long as you are not logged in. :(

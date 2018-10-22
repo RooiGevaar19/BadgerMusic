@@ -93,43 +93,39 @@ userController.removeAccount = function(req, res) {
 };
 
 // modify account
-//userController.modifyAccount = function(req, res) {
-//    res.render("modifyacc", {user : req.user});
-//};
-//
-//userController.doModifyAccount = function(req, res) {
-//    Account.findById(req.body.id, function(err, acc) {
-//        if (
-//            (!isNaN(req.body.birthdayy)) && (!isNaN(req.body.birthdaym)) && (!isNaN(req.body.birthdayd))
-//        ) {
-//            if (
-//                req.body.username && req.body.nickname
-//            ) {
-//                if (err) res.send(err);
-//                acc.username = req.body.username;
-//                acc.nickname = req.body.nickname;
-//                acc.name = req.body.name ? req.body.name : "";
-//                acc.description = req.body.description ? req.body.description : "";
-//                let datestring = ""+req.body.birthdayy+"-"+req.body.birthdaym+"-"+req.body.birthdayd+"";
-//                if (req.body.birthdayy && req.body.birthdaym && req.body.birthdayd) {
-//                    acc.birthday = new Date(datestring);
-//                }
-//                acc.address = req.body.address ? req.body.address : "";
-//                acc.telephone = req.body.telephone ? req.body.telephone : "";
-//                acc.isPrivate = req.body.isprivate === "true" ? true : false;   
-//                acc.save(function(err) {
-//                    if (err) return res.render("modifyacc", { user : req.user, message : err.message });
-//                    res.redirect('/myaccount');
-//                });
-//            } else {
-//                return res.render("modifyacc", { user : req.user, message : "The required fields must be filled." });
-//            }
-//        } else {
-//            return res.render("modifyacc", { user : req.user, message : "Date is not valid." });
-//        } 
-//
-//    });
-//};
+userController.modifyAccount = function(req, res) {
+    res.render("myaccount_modify", { user : req.user });
+};
+
+userController.doModifyAccount = function(req, res) {
+    Account.findById(req.body.id, function(err, acc) {
+        if (
+            (!isNaN(req.body.birthdayy)) && (!isNaN(req.body.birthdaym)) && (!isNaN(req.body.birthdayd))
+        ) {
+            if (req.body.nickname) {
+                if (err) res.send(err);
+                acc.nickname = req.body.nickname;
+                acc.fullname = req.body.fullname ? req.body.fullname : "";
+                acc.description = req.body.description ? req.body.description : "";
+                let datestring = ""+req.body.birthdayy+"-"+req.body.birthdaym+"-"+req.body.birthdayd+"";
+                if (req.body.birthdayy && req.body.birthdaym && req.body.birthdayd) {
+                    acc.birthday = new Date(datestring);
+                }
+                acc.location = req.body.location ? req.body.location : "";
+                acc.isPrivate = req.body.isprivate === "true" ? true : false;   
+                acc.save(function(err) {
+                    if (err) return res.render("modifyacc", { user : req.user, message : err.message });
+                    res.redirect('/myaccount');
+                });
+            } else {
+                return res.render("myaccount_modify", { user : req.user, message : "The required fields must be filled." });
+            }
+        } else {
+            return res.render("myaccount_modify", { user : req.user, message : "Date is not valid." });
+        } 
+
+    });
+};
 
 //userController.changePassword = function(req, res) {
 //    res.render("changepass", {user : req.user});

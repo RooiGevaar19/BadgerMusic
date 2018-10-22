@@ -61,13 +61,13 @@ app.get("/signup", auth.register);
 app.post('/signup', auth.doRegister);
 app.post("/remacc", auth.removeAccount);
 
-app.get("/myaccount", function(req, res) {
-    res.render("myaccount", { user : req.user });
-});
-
-app.get("/modifyacc", function(req, res) {
-    res.render("myaccount_modify", { user : req.user });
-});
+app
+    .get("/myaccount", function(req, res) {
+        res.render("myaccount", { user : req.user });
+    })
+    .get("/modifyacc", auth.modifyAccount)
+    .post("/modifyacc", auth.doModifyAccount)
+;
 
 // ========= API ROUTER
 

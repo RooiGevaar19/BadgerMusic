@@ -16,6 +16,14 @@ html(lang="en")
                             img(src="/pictures/BadgerMusicLogoWhite1.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
                     .panel_info Hello, #{(user?user.nickname:'guest')}!
                 .tbitems
+                    img(src="/pictures/sidebar.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
+            .toolbar#fixed
+                .hleft
+                    .logo
+                        a(href="/")
+                            img(src="/pictures/BadgerMusicLogoWhite1.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
+                    .panel_info Hello, #{(user?user.nickname:'guest')}!
+                .tbitems
                     img#showsidebar(src="/pictures/sidebar.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
         .page
             .sidebar#sidebarid
