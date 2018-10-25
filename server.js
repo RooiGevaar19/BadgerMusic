@@ -73,6 +73,8 @@ app
     .post("/changepass", auth.doChangePassword)
     .get('/changeAvatar', auth.changeAvatar);
 
+app.get('/account/:aid', auth.showAccount);
+
 // ========= PHOTOS STORAGE
 
 let avatarStorage = multer.diskStorage({

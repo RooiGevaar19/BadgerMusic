@@ -14,7 +14,13 @@ html(lang="en")
                     .logo
                         a(href="/")
                             img(src="/pictures/BadgerMusicLogoWhite1.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
-                    .panel_info Hello, #{(user?user.nickname:'guest')}!
+                    if user
+                        a(href="/account/#{user.id}")
+                            .userinfo
+                                img.avatar(src="/photos/accounts/avatar/#{user.id}.jpg", onerror="this.src='/pictures/unknown.jpg'") 
+                                .account #{user.nickname}
+                    else
+                        .panel_info Hello, guest!
                 .tbitems
                     img(src="/pictures/sidebar.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
             .toolbar#fixed
@@ -22,7 +28,13 @@ html(lang="en")
                     .logo
                         a(href="/")
                             img(src="/pictures/BadgerMusicLogoWhite1.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
-                    .panel_info Hello, #{(user?user.nickname:'guest')}!
+                    if user
+                        a(href="/account/#{user.id}")
+                            .userinfo
+                                img.avatar(src="/photos/accounts/avatar/#{user.id}.jpg", onerror="this.src='/pictures/unknown.jpg'") 
+                                .account #{user.nickname}
+                    else
+                        .panel_info Hello, guest!
                 .tbitems
                     img#showsidebar(src="/pictures/sidebar.png", onerror="this.src='/pictures/imageNotAvailable.jpg'")
         .page

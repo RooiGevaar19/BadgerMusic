@@ -7,6 +7,32 @@ let Account = require("../models/Account");
 //let Message = require("../models/Message");
 //let Chat = require("../models/ChatMessage");
 
+/*
+        (month === 1)&&(day <= 31)
+        ||(month === 2)&&(
+            ((year % 4 === 0)&&(day <= 29))
+            ||(((year) % 4 !== 0)&&(day <= 28))
+        )
+        ||(month === 3)&&(day <= 31)
+        ||(month === 4)&&(day <= 30)
+        ||(month === 5)&&(day <= 31)
+        ||(month === 6)&&(day <= 30)
+        ||(month === 7)&&(day <= 31)
+        ||(month === 8)&&(day <= 31)
+        ||(month === 9)&&(day <= 30)
+        ||(month === 10)&&(day <= 31)
+        ||(month === 11)&&(day <= 30)
+        ||(month === 12)&&(day <= 31) 
+*/
+
+function checkdate(month, day, year) {
+    if ((month === 1)&&(day <= 31)||(month === 2)&&(((year % 4 === 0)&&(day <= 29))||(((year) % 4 !== 0)&&(day <= 28)))||(month === 3)&&(day <= 31)||(month === 4)&&(day <= 30)||(month === 5)&&(day <= 31)||(month === 6)&&(day <= 30)||(month === 7)&&(day <= 31)||(month === 8)&&(day <= 31)||(month === 9)&&(day <= 30)||(month === 10)&&(day <= 31)||(month === 11)&&(day <= 30)||(month === 12)&&(day <= 31)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 let userController = {};
 
 // Go to registration page
@@ -100,7 +126,9 @@ userController.modifyAccount = function(req, res) {
 userController.doModifyAccount = function(req, res) {
     Account.findById(req.body.id, function(err, acc) {
         if (
-            (!isNaN(req.body.birthdayy)) && (!isNaN(req.body.birthdaym)) && (!isNaN(req.body.birthdayd))
+            (!isNaN(req.body.birthdayy)) && (!isNaN(req.body.birthdaym)) && (!isNaN(req.body.birthdayd)) && (
+                checkdate(parseInt(req.body.birthdaym),parseInt(req.body.birthdayd),parseInt(req.body.birthdayy))
+            )
         ) {
             if (req.body.nickname) {
                 if (err) res.send(err);
