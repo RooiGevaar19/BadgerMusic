@@ -1,0 +1,32 @@
+extend layout
+
+block content
+    .align-center
+        .window
+            form(action="/firstrun", method="post")
+                .title Create the first admin account!
+                table
+                    tr.field
+                        td
+                            p E-mail:
+                        td
+                            input.email(type="text", name="username")
+                    tr.field
+                        td
+                            p Nickname:
+                        td
+                            input.nname(type="text", name="nickname")
+                    tr.field
+                        td
+                            p Password:
+                        td
+                            input.pass(type="password", name="password")
+                    tr.field
+                        td
+                            p Retype password:
+                        td
+                            input.rpass(type="password", name="password2")
+                .field
+                    input(type="submit", value="Sign up!")
+                    p #{message}
+                    p #{output}

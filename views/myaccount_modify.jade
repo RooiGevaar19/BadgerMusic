@@ -71,15 +71,16 @@ block content
                         tr
                             td
                                 input#pt(type="radio", name="isprivate", value="false", checked=(user.isPrivate !== true ? "checked" : undefined))
-                                label(for="pt") Allow the other users to see your birthday
+                                label(for="pt") Show your personal data** 
                         tr
                             td
                                 input#pf(type="radio", name="isprivate", value="true", checked=(user.isPrivate === true ? "checked" : undefined))
-                                label(for="pf") Disallow the other users to see your birthday
+                                label(for="pf") Hide your personal data**
                     .field
                         input.mod(type="submit" value="Change account information")
                     .field
                         p * – Field required
+                        p ** – This is your birthday, e-mail, location, name and surname.
                         p #{message}
         else
             p We are sorry, but you won't find anything interesting here – as long as you are not logged in. :(

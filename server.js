@@ -71,9 +71,10 @@ app
     .post("/modifyacc", auth.doModifyAccount)
     .get("/changepass", auth.changePassword)
     .post("/changepass", auth.doChangePassword)
-    .get('/changeAvatar', auth.changeAvatar);
+    .get('/changeAvatar', auth.changeAvatar)
+    .get('/account/:aid', auth.showAccount);
 
-app.get('/account/:aid', auth.showAccount);
+app.get("/firstrun", auth.firstRun).post("/firstrun", auth.doFirstRun);
 
 // ========= PHOTOS STORAGE
 

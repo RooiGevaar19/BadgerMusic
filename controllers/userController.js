@@ -48,12 +48,13 @@ userController.doRegister = function(req, res) {
             Account.register(
                 new Account({ 
                     username: req.body.username, 
-                    nickname: req.body.nickname 
+                    nickname: req.body.nickname,
+                    isAdmin: false 
                 }), 
                 req.body.password, 
                 function(err, user) {
                     if (err) {
-                        return res.render("signup", { message : err.message });
+                        return res.render("account_signup", { message : err.message });
                     }
                     passport.authenticate('local', { failureRedirect: "/login" })(req, res, function () {
                         res.redirect('/');
@@ -85,6 +86,55 @@ userController.doLogin = function(req, res) {
 userController.logout = function(req, res) {
   req.logout();
   res.redirect('/');
+};
+
+// Go to registration page
+userController.firstRun = function(req, res) {
+    let bears;
+    let done = false;
+
+    Account
+        .find({ isAdmin : true })
+        .exec(function(err, res) {
+            bears = res;
+            done = true;
+        });
+
+    setTimeout(function() {
+        while (done !== true) {}
+        if (Object.keys(bears).length === 0) {
+            res.render('account_signup_admin', {message : ""});
+        } else {
+            res.render('blank', {message : ""});
+        }
+    }, 200);
+};
+
+userController.doFirstRun = function(req, res) {
+    if (req.body.username && req.body.nickname && req.body.password && req.body.password2) {
+        if (req.body.password === req.body.password2) {
+            Account.register(
+                new Account({ 
+                    username: req.body.username, 
+                    nickname: req.body.nickname,
+                    isAdmin: true 
+                }), 
+                req.body.password, 
+                function(err, user) {
+                    if (err) {
+                        return res.render("account_signup_admin", { message : err.message });
+                    }
+                    passport.authenticate('local', { failureRedirect: "/login" })(req, res, function () {
+                        res.redirect('/');
+                    });
+                }
+            );
+        } else {
+            return res.render("account_signup_admin", { message : "Passwords don\'t match" });
+        }
+    } else {
+        return res.render("account_signup_admin", { message : "Fill all fields." });
+    }
 };
 
 // remove account

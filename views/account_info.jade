@@ -5,56 +5,50 @@ block scripts
 
 block content
     .align-center
-        if user
-            .window
-                .accinfo
-                    .logo 
-                        img.avatar_big(src="/photos/accounts/avatar/#{user.id}.jpg", onerror="this.src='/pictures/unknown.jpg'")
-                    .title Your account information
-                    table
+        .window
+            .accinfo
+                .logo 
+                    img.avatar_big(src="/photos/accounts/avatar/#{account.id}.jpg", onerror="this.src='/pictures/unknown.jpg'")
+                .title #{account.nickname}
+                table
+                    unless account.isPrivate || !user
                         tr
                             td
                                 p E-mail:
                             td
-                                p #{user.username}
-                        tr
-                            td
-                                p Nickname:
-                            td
-                                p #{user.nickname}
-                        tr
-                            td
-                                p Name and Surname:
-                            td
-                                p #{user.fullname?user.fullname:"<not provided>"}
-                        tr
-                            td
-                                p Location
-                            td
-                                p #{user.location?user.location:"<not provided>"}
-                        tr
-                            td
-                                p Birthday
-                            td
-                                p #{user.birthday?""+(user.birthday.getMonth()+1)+"/"+user.birthday.getDate()+"/"+user.birthday.getFullYear()+"":"<not provided>"}
-                        tr
-                            td
-                                p Description
-                            td.textbox
-                                p #{user.description?user.description:"<not provided>"}
-                    .field
-                        p #{message}
-            .window_buttons
-                form(action="/changeAvatar" method="GET")
-                    input(type="submit", value="Change avatar")
-                form(action="/modifyacc" method="GET")
-                    input(type="submit", value="Change account information")
-                form(action="/changepass" method="GET")
-                    input(type="submit", value="Change password")
-                form(action="/account/#{user.id}" method="GET")
-                    input(type="submit", value="See your profile page")
-                form(action="/remacc" method="POST")
-                    input(type="hidden", name="id", value="#{user.id}")
-                    input.rem(type="submit", value="Delete your account")
-        else
-            p We are sorry, but you won't find anything interesting here – as long as you are not logged in. :(
+                                p #{account.username}
+                        if account.fullname
+                            tr
+                                td
+                                    p Name and Surname:
+                                td
+                                    p #{account.fullname}
+                        if account.location
+                            tr
+                                td
+                                    p Location
+                                td
+                                    p #{account.location}
+                        if account.birthday
+                            tr
+                                td
+                                    p Birthday
+                                td
+                                    p #{""+(account.birthday.getMonth()+1)+"/"+account.birthday.getDate()+"/"+account.birthday.getFullYear()+""}
+                    tr
+                        td
+                            p Admission date
+                        td
+                            p #{account.creationDate?""+(account.creationDate.getMonth()+1)+"/"+account.creationDate.getDate()+"/"+account.creationDate.getFullYear()+"":"<not provided>"}
+                    tr
+                        td
+                            p Description
+                        td.textbox
+                            p #{account.description?account.description:"No description provided. :("}
+                .field
+                    p #{message}
+        .window_buttons
+            if user
+                if user.id === account.id
+                    form(action="/myAccount" method="GET")
+                        input(type="submit", value="Account Settings")
