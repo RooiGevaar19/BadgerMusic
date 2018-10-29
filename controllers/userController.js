@@ -113,22 +113,39 @@ userController.firstRun = function(req, res) {
 userController.doFirstRun = function(req, res) {
     if (req.body.username && req.body.nickname && req.body.password && req.body.password2) {
         if (req.body.password === req.body.password2) {
-            Account.register(
-                new Account({ 
-                    username: req.body.username, 
-                    nickname: req.body.nickname,
-                    isAdmin: true 
-                }), 
-                req.body.password, 
-                function(err, user) {
-                    if (err) {
-                        return res.render("account_signup_admin", { message : err.message });
-                    }
-                    passport.authenticate('local', { failureRedirect: "/login" })(req, res, function () {
-                        res.redirect('/');
-                    });
+            let bears;
+            let done = false;
+
+            Account
+                .find({ isAdmin : true })
+                .exec(function(err, res) {
+                    bears = res;
+                    done = true;
+                });
+
+            setTimeout(function() {
+                while (done !== true) {}
+                if (Object.keys(bears).length === 0) {
+                    Account.register(
+                        new Account({ 
+                            username: req.body.username, 
+                            nickname: req.body.nickname,
+                            isAdmin: true 
+                        }), 
+                        req.body.password, 
+                        function(err, user) {
+                            if (err) {
+                                return res.render("account_signup_admin", { message : err.message });
+                            }
+                            passport.authenticate('local', { failureRedirect: "/login" })(req, res, function () {
+                                res.redirect('/');
+                            });
+                        }
+                    );
+                } else {
+                    res.send({message: "haha nope"});
                 }
-            );
+            }, 200);
         } else {
             return res.render("account_signup_admin", { message : "Passwords don\'t match" });
         }
