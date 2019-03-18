@@ -39,21 +39,21 @@ block content
                             td
                                 select(name="birthdaym")
                                     - for (let i = 1; i <= 12; i++) {
-                                        if user && user.birthday.getMonth()+1 === i
+                                        if user && user.birthday && user.birthday.getMonth()+1 === i
                                             option(value="#{i}", selected="selected")= i
                                         else
                                             option(value="#{i}")= i
                                     - }
                                 select(name="birthdayd")
                                     - for (let i = 1; i <= 31; i++) {
-                                        if user && user.birthday.getDate() === i
+                                        if user && user.birthday && user.birthday.getDate() === i
                                             option(value="#{i}", selected="selected")= i
                                         else
                                             option(value="#{i}")= i
                                     - }
                                 select(name="birthdayy")
                                     - for (let i = 1889; i <= 2137; i++) {
-                                        if user && user.birthday.getFullYear() === i
+                                        if user && user.birthday && user.birthday.getFullYear() === i
                                             option(value="#{i}", selected="selected")= i
                                         else
                                             option(value="#{i}")= i

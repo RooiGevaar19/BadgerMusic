@@ -57,5 +57,23 @@ html(lang="en")
                         .category_item#signin Log Out
                     a(href="/myaccount")
                         .category_item#signin Account Settings
+                    br
+                    a(href="/groups/#{user.id}")
+                        .category_item#signin Groups you manage
+                    a(href="/mygroups")
+                        .category_item#signin Groups you are member
+                    a(href="/mygroups")
+                        .category_item#signin Most members
+                    a(href="/mygroups")
+                        .category_item#signin Most songs
+                    a(href="/mygroups")
+                        .category_item#signin Search for a group
+                    a(href="/addgroup")
+                        .category_item#signin Create a new group
+                    br
+                    a(href="/mygroups")
+                        .category_item#signin Private messages
+                    a(href="/mygroups")
+                        .category_item#signin Group messages
             .content 
                 block content

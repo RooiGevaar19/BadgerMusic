@@ -9,10 +9,11 @@ block scripts
 
 block content
     .align-center
-        each item in groups
-            .musicgroup
-                img(src="/pictures/#{item._id}.png", onerror="this.src='/pictures/noGroupImage.png'")
-                .info
-                    .title #{item.name}
-                    .about #{item.songscount} songs and #{item.memberscount} members
+        - for (let i = 1; i <= 20; i++) {
+        .musicgroup
+            img(src="/pictures/guwno.png", onerror="this.src='/pictures/noGroupImage.png'")
+            .info
+                .title Example1
+                .about 30 songs and 50 members
+        - }
         audio(src="/mp3/test.mp3")

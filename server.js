@@ -38,6 +38,9 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
+let MGController = require("./controllers/musicgroupController.js"); 
+let MusicGroup = require('./models/MusicGroup.js');
+
 // ========= DATABASE
 
 let mongoose = require('mongoose');
@@ -50,9 +53,10 @@ mongoose.connect("mongodb://localhost:27017/badgermusic");
 
 // ========= HTTP FUNCTIONS
 
-app.get("/", function(req, res) {
-    res.render("index", { user : req.user });
-});
+//app.get("/", function(req, res) {
+//    res.render("index", { user : req.user });
+//});
+app.get('/', MGController.home);
 app.get("/login", function(req, res) {
     res.render("account_signin", {});
 });
@@ -75,6 +79,10 @@ app
     .get('/account/:aid', auth.showAccount);
 
 app.get("/firstrun", auth.firstRun).post("/firstrun", auth.doFirstRun);
+
+app
+    .get("/addgroup", MGController.addMusicGroup)
+    .post("/addgroup", MGController.doAddMusicGroup);
 
 // ========= PHOTOS STORAGE
 
@@ -113,6 +121,25 @@ router.route('/accountz')
                 res.send(err);
             }
             res.json(bears);
+        });
+    });
+
+router.route('/groupz')
+    .get(function(req, res) {
+        MusicGroup.find({}, function(err, bears) {
+            if (err) {
+                console.log('error');
+                res.send(err);
+            }
+            res.json(bears);
+        });
+    });
+
+router.route('/groupz_remall')
+    .get(function(req, res) {
+        MusicGroup.remove({}, function(err, bear) {
+            if (err) res.send(err);
+            res.json({ message: 'Successfully deleted' });
         });
     });
 

@@ -1,0 +1,43 @@
+extend layout
+
+block scripts
+    script(type="text/javascript", src="/warnings.js")
+
+block content
+    .align-center
+        if user
+            .window
+                form#accform(action="/addgroup", method="post")
+                    .title Create a new group!
+                    table
+                        tr
+                            td
+                                p Name of a group*:
+                            td
+                                input(type="text", name="groupname")
+                        tr
+                            td
+                                p Description
+                            td
+                                .textbox
+                                    textarea(name="description", form="accform", cols="40")
+                    table.privacyinfo
+                        tr
+                            td
+                                input#pf(type="radio", name="grouptype", value="public", checked="checked")
+                                label(for="pf") Public group
+                        tr
+                            td
+                                input#pt(type="radio", name="grouptype", value="private")
+                                label(for="ps") Private group – the group content is visible only for members 
+                        tr
+                            td
+                                input#pt(type="radio", name="grouptype", value="secret")
+                                label(for="pt") Secret group – all group is visible only for members 
+                    .field
+                        input(type="submit" value="Confirm!")
+                    .field
+                        p * – Field required
+                        p #{message}
+        else
+            p We are sorry, but you won't find anything interesting here – as long as you are not logged in. :(
